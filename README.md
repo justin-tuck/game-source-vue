@@ -27,3 +27,17 @@ npm run dev
 ```sh
 npm run build
 ```
+
+
+## Styles
+
+Bootstrap and [Vuetify] (https://vuetifyjs.com/)
+
+
+## Libraries 
+[Pinia](pinia.vue.js) - store 
+[Firebase](firebase.google.com) - back end 
+[TipTap](https://tiptap.dev/docs) - Inline Article Editor (What you see is what you get)
+[Cloudinary](cloudinary.com) - for use in images 
+[Vue 3 Carousel](https://www.npmjs.com/package/vue3-carousel) - image carousel
+[Vue Masonry](https://www.npmjs.com/package/vue-masonry) - image block format

@@ -15,19 +15,53 @@ const DEFAULT_USER = {
     isAdmin: null
 }
 
+ import { useToast } from "vue-toast-notification";
+ const $toast = useToast(); 
+
 export const useUserStore = defineStore('user', {
     state:()=> ({
         loading: false, 
         user: DEFAULT_USER,
         auth: false
     }),
-    getters:{},
+    getters:{
+        getUserData(state) {
+            return state.user;
+        },
+        getUserId(state) {
+            return state.user.uid
+        }
+    },
     actions:{
         setUser(newUser) {
-            console.log("setting new user")
-            console.log(newUser)
             this.user = { ...this.user, ...newUser };
             this.auth = true; 
+        },
+        async updateProfile(formData) {
+            try {
+                const userRef = doc(DB, 'users', this.getUserId);
+                await updateDoc(userRef, {
+                    ...formData
+                });
+
+                this.setUser(formData); 
+
+                $toast.success('Updated Profile!');
+                return true; 
+            } catch(error) {
+                $toast.error(error.message);
+                throw new Error(error)
+            }
+        },
+        async signOut() {
+            try {
+                await signOut(AUTH);
+                this.user = (DEFAULT_USER);
+                this.auth = false;
+                router.push({name: 'home'});
+            } catch(error) {
+                throw new Error(error.code)
+            }
         },
         async autosignin(uid) {
             try {

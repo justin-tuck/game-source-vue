@@ -31,3 +31,6 @@ coverage
 
 #Firebase
 firebase-config.js
+
+#build
+/dist

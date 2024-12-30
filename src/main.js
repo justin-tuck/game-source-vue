@@ -6,6 +6,8 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
+// MASONRY
+import { VueMasonryPlugin } from 'vue-masonry'
 
 // Toasts
 import ToastPlugin from 'vue-toast-notification';
@@ -21,19 +23,13 @@ import * as directives from 'vuetify/directives'
 const vuetify = createVuetify({
     components,
     directives,
-    icons: {
-        defaultSet: 'mdi',
-        aliases,
-        sets: {
-          mdi,
-        },
-      },
   })
 
 
   /// FIRE BASE 
   import { AUTH } from '../firebase-config'
   import { onAuthStateChanged } from 'firebase/auth'
+
 
   let app;  
   onAuthStateChanged(AUTH, ()=>{
@@ -44,7 +40,8 @@ const vuetify = createVuetify({
       app.use(router)
       app.use(vuetify);
       app.use(ToastPlugin);
-
+      app.use(VueMasonryPlugin); 
+      
       app.mount('#app')
     }
   })
